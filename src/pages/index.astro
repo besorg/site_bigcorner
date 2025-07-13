@@ -1,0 +1,59 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+---
+
+<Layout title="BSO Web Studio">
+  <Navbar />
+
+<section class="hero">
+  <div class="hero-columns">
+    <div class="hero-image">
+      <img src="/images/hero.jpg" alt="Desarrolladores trabajando">
+    </div>
+    <div class="hero-text">
+      <h1 class="text-dynamic">Tu web, sin vueltas</h1>
+      <p class="text-dynamic">Diseñamos sitios modernos, rápidos y hechos a medida para negocios locales y emprendedores.</p>
+      <a class="btn" href="https://wa.me/5491157223811" target="_blank">Hablá con nosotros</a>
+    </div>
+  </div>
+</section>
+
+  <section class="services" id="services">
+    <h2 class="text-dynamic">Qué hacemos</h2>
+    <div class="service-list">
+      <div class="service">
+        <img src="/images/icon-design.png" alt="Diseño web">
+        <h3 class="text-dynamic">Diseño web</h3>
+        <p class="text-dynamic">Landing pages, catálogos, institucionales y más. Sitios claros, efectivos y responsivos.</p>
+      </div>
+      <div class="service">
+        <img src="/images/icon-whatsapp.png" alt="WhatsApp">
+        <h3 class="text-dynamic">Conexión con WhatsApp</h3>
+        <p class="text-dynamic">Botones de contacto, enlaces directos, integración a tu red social o canal de atención.</p>
+      </div>
+      <div class="service">
+        <img src="/images/icon-hosting.png" alt="Hosting">
+        <h3 class="text-dynamic">Hosting incluido</h3>
+        <p class="text-dynamic">Nos encargamos de la publicación y mantenimiento, para que vos no te preocupes por nada.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="about" id="about">
+    <h2 class="text-dynamic">Quiénes somos</h2>
+    <p class="text-dynamic">Somos un equipo pequeño, flexible y directo. Nos gusta hacer las cosas simples y bien. Entendemos el valor de tu tiempo y te ayudamos a tener presencia online con estilo propio.</p>
+    <img src="/images/team.jpg" alt="Nuestro equipo" />
+  </section>
+
+  <section class="contact" id="contact">
+    <h2 class="text-dynamic">Contacto</h2>
+    <p class="text-dynamic">¿Querés empezar hoy mismo? Escribinos directamente por WhatsApp.</p>
+    <a class="btn" href="https://wa.me/5491157223811" target="_blank">Enviar mensaje</a>
+    <p class="text-dynamic" style="margin-top: 20px;">O llamanos al <strong>11 5722-3811</strong></p>
+  </section>
+
+  <footer>
+    <p class="text-dynamic">© 2025 BSO Web Studio – Sitios web sin vueltas</p>
+  </footer>
+</Layout>
