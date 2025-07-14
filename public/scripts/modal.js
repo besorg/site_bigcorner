@@ -1,64 +1,51 @@
-const products = window.dynamicProducts || [];
-const whatsapp = window.dynamicWhatsapp || "5491132776974";
-
 window.openModalFromList = function(index) {
   const products = window.dynamicProducts || [];
   const whatsapp = window.dynamicWhatsapp || "5491132776974";
 
-  const modal = document.getElementById('burger-modal');
   const product = products[index];
+  if (!product) {
+    console.error("Producto no encontrado en el índice:", index);
+    return;
+  }
 
-  document.getElementById('modal-img').src = product.image;
-  document.getElementById('modal-title').textContent = product.name;
-  document.getElementById('modal-description').textContent = product.description;
-  document.getElementById('product-name').value = product.name;
-  document.getElementById('quantity').value = 1;
-  document.getElementById('order-total').textContent = `$${product.price}`;
+  const modal = document.getElementById('burger-modal');
+  const img = document.getElementById('modal-img');
+  const title = document.getElementById('modal-title');
+  const description = document.getElementById('modal-description');
+  const priceDisplay = document.getElementById('order-total');
+  const productName = document.getElementById('product-name');
+  const quantityInput = document.getElementById('quantity');
 
-  modal.dataset.productIndex = index;
+  img.src = product.image;
+  img.alt = product.name;
+  title.textContent = product.name;
+  description.textContent = product.description;
+  priceDisplay.textContent = `$${product.price}`;
+  productName.value = product.name;
+  quantityInput.value = 1;
+
   modal.classList.remove('hidden');
 };
 
 window.closeModal = function() {
-  document.getElementById('burger-modal').classList.add('hidden');
-};
-
-// Cerrar al hacer clic fuera del modal
-document.addEventListener('click', function (event) {
   const modal = document.getElementById('burger-modal');
-  const modalContent = modal.querySelector('.modal-content');
-
-  if (!modal.classList.contains('hidden') && !modalContent.contains(event.target)) {
-    closeModal();
-  }
-});
-
-// Actualizar total al cambiar cantidad
-document.addEventListener('DOMContentLoaded', function () {
-  const qtyInput = document.getElementById('quantity');
-  qtyInput.addEventListener('input', function () {
-    const modal = document.getElementById('burger-modal');
-    const index = parseInt(modal.dataset.productIndex, 10);
-    const product = products[index];
-    const qty = parseInt(qtyInput.value, 10) || 1;
-    const total = product.price * qty;
-    document.getElementById('order-total').textContent = `$${total}`;
-  });
-});
+  modal.classList.add('hidden');
+};
 
 window.sendOrder = function(event) {
   event.preventDefault();
 
-  const modal = document.getElementById('burger-modal');
-  const index = parseInt(modal.dataset.productIndex, 10);
-  const product = products[index];
-
-  const qty = document.getElementById('quantity').value;
+  const name = document.getElementById('product-name').value;
+  const quantity = parseInt(document.getElementById('quantity').value);
   const address = document.getElementById('address').value;
   const comment = document.getElementById('comment').value;
+  const price = window.dynamicProducts.find(p => p.name === name)?.price || 0;
 
-  const text = encodeURIComponent(`Hola! Quiero pedir ${qty} ${product.name}\nDirección: ${address}\n${comment ? 'Comentario: ' + comment : ''}`);
-  window.open(`https://wa.me/${whatsapp}?text=${text}`, '_blank');
+  const total = price * quantity;
+  const message = `¡Hola! Quisiera pedir ${quantity} ${name}.\nDirección: ${address}\nComentario: ${comment}\nTotal: $${total}`;
 
-  closeModal();
+  const whatsapp = window.dynamicWhatsapp || "5491132776974";
+  const url = `https://wa.me/${whatsapp}?text=${encodeURIComponent(message)}`;
+
+  window.open(url, "_blank");
 };
