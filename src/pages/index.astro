@@ -1,23 +1,5 @@
 ---
 import Layout from '../layouts/Layout.astro';
-const whatsapp = '5491132776974';
-const products = [
-  {
-    name: 'Bacon Smash',
-    image: '/images/burger1.jpg',
-    description: 'Doble carne, cheddar, panceta crocante y salsa especial.',
-  },
-  {
-    name: 'Clásica Doble',
-    image: '/images/burger2.jpg',
-    description: 'Pan casero, doble medallón, lechuga, tomate y cheddar.',
-  },
-  {
-    name: 'Veggie Corner',
-    image: '/images/burger3.jpg',
-    description: 'Hamburguesa de lentejas con vegetales y alioli vegano.',
-  },
-];
 ---
 
 <Layout title="BIG CORNER - Hamburguesas">
@@ -26,7 +8,7 @@ const products = [
       <div class="hero-text">
         <h1>Las mejores hamburguesas al mejor precio</h1>
         <p>De jueves a domingo de 20:00 a 00:30</p>
-        <a class="btn hero-btn" href="https://wa.me/${whatsapp}" target="_blank">Hacenos tu pedido</a>
+        <a class="btn hero-btn" href="https://wa.me/5491132776974" target="_blank">Hacenos tu pedido</a>
       </div>
       <div class="hero-image">
         <img src="/images/logo.png" alt="Logo BIG CORNER" style="max-width: 200px; border-radius: 12px;" />
@@ -37,15 +19,7 @@ const products = [
   <section class="menu" id="menu">
     <h2>Menú</h2>
     <p class="menu-subtitle">Tu pedido está a solo unos clicks y te lo llevamos a domicilio</p>
-    <div class="burger-list">
-      {products.map((product, index) => (
-        <div class="burger-card" onclick={`openModal(${index})`}>
-          <img src={product.image} alt={product.name} />
-          <h3>{product.name}</h3>
-          <p>{product.description}</p>
-        </div>
-      ))}
-    </div>
+    <div class="burger-list" id="burger-list"></div>
   </section>
 
   <section class="about" id="about">
@@ -65,7 +39,6 @@ const products = [
     </div>
   </section>
 
-  <!-- Modal -->
   <div id="burger-modal" class="modal hidden">
     <div class="modal-content">
       <span class="close" onclick="closeModal()">&times;</span>
@@ -92,11 +65,11 @@ const products = [
     <h2>Contacto</h2>
     <p>Contactanos por nuestras redes sociales o hacé tu pedido directamente.</p>
     <div class="contact-methods">
-      <a href="https://wa.me/${whatsapp}" target="_blank">
-        <img src="/images/whatsapp.png" alt="WhatsApp" class="icon" />
+      <a href="https://wa.me/5491132776974" target="_blank">
+        <img src="/images/whatsapp-icon.png" alt="WhatsApp" class="icon" />
       </a>
       <a href="https://instagram.com/bigcorner2024" target="_blank">
-        <img src="/images/instagram.png" alt="Instagram" class="icon" />
+        <img src="/images/instagram-icon.png" alt="Instagram" class="icon" />
       </a>
     </div>
   </section>
@@ -106,7 +79,30 @@ const products = [
       <img src="/images/favicon-bso.png" alt="BSO Logo" />
       Sitio desarrollado por <a href="https://marketing-bso.netlify.app/" target="_blank" style="color: inherit; text-decoration: underline;">BSO Web Studio</a>
     </p>
+    <p>&copy; <script>document.write(new Date().getFullYear())</script> BIG CORNER. Todos los derechos reservados.</p>
   </footer>
 
   <script src="/scripts/modal.js" type="module"></script>
+  <script>
+    fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vSIE2W9qp2LKhZGC6F0_hW6BL0dxsR4PlYOaMjB5BZT7YDCcDe1SNNr1Go4DsV5BNb2vylNSXG0ulID/pub?output=csv')
+      .then(res => res.text())
+      .then(data => {
+        const lines = data.split('\n').filter(l => l.trim());
+        const products = lines.slice(1).map(line => {
+          const [name, description, image, price] = line.split(',');
+          return { name, description, image, price };
+        });
+
+        const list = document.getElementById('burger-list');
+        list.innerHTML = products.map((product, index) => `
+          <div class="burger-card" onclick="openModalFromList(${index})">
+            <img src="${product.image}" alt="${product.name}" />
+            <h3>${product.name}</h3>
+            <p>${product.description}</p>
+            <p class="price">$${product.price}</p>
+          </div>
+        `).join('');
+        window.dynamicProducts = products;
+      });
+  </script>
 </Layout>
