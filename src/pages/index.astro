@@ -1,59 +1,59 @@
----
-import Layout from '../layouts/Layout.astro';
-import Navbar from '../components/Navbar.astro';
----
+<main>
 
-<Layout title="BSO Web Studio">
-  <Navbar />
-
-<section class="hero">
-  <div class="hero-columns">
-    <div class="hero-image">
-      <img src="/images/hero.jpg" alt="Desarrolladores trabajando">
-    </div>
-    <div class="hero-text">
-      <h1 class="text-dynamic">Tu web, sin vueltas</h1>
-      <p class="text-dynamic">Diseñamos sitios modernos, rápidos y hechos a medida para negocios locales y emprendedores.</p>
-      <a class="btn" href="https://wa.me/5491157223811" target="_blank">Hablá con nosotros</a>
-    </div>
-  </div>
-</section>
-
-  <section class="services" id="services">
-    <h2 class="text-dynamic">Qué hacemos</h2>
-    <div class="service-list">
-      <div class="service">
-        <img src="/images/icon-design.png" alt="Diseño web">
-        <h3 class="text-dynamic">Diseño web</h3>
-        <p class="text-dynamic">Landing pages, catálogos, institucionales y más. Sitios claros, efectivos y responsivos.</p>
-      </div>
-      <div class="service">
-        <img src="/images/icon-whatsapp.png" alt="WhatsApp">
-        <h3 class="text-dynamic">Conexión con WhatsApp</h3>
-        <p class="text-dynamic">Botones de contacto, enlaces directos, integración a tu red social o canal de atención.</p>
-      </div>
-      <div class="service">
-        <img src="/images/icon-hosting.png" alt="Hosting">
-        <h3 class="text-dynamic">Hosting incluido</h3>
-        <p class="text-dynamic">Nos encargamos de la publicación y mantenimiento, para que vos no te preocupes por nada.</p>
-      </div>
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>🍔 BIG CORNER</h1>
+      <p class="subtext">Las mejores hamburguesas al mejor precio</p>
+      <img src="/images/hero-burger.jpg" alt="Hamburguesa principal" class="hero-image" />
+      <a class="btn" href="https://wa.me/5491132776974" target="_blank">Hacé tu pedido por WhatsApp</a>
     </div>
   </section>
 
-  <section class="about" id="about">
-    <h2 class="text-dynamic">Quiénes somos</h2>
-    <p class="text-dynamic">Somos un equipo pequeño, flexible y directo. Nos gusta hacer las cosas simples y bien. Entendemos el valor de tu tiempo y te ayudamos a tener presencia online con estilo propio.</p>
-    <img src="/images/team.jpg" alt="Nuestro equipo" />
+  <!-- SOBRE NOSOTROS -->
+  <section class="about">
+    <h2>¿Quiénes somos?</h2>
+    <p>Somos una hamburguesería artesanal ubicada en el corazón del barrio. En BIG CORNER cocinamos con pasión, usando ingredientes frescos y recetas caseras para lograr el mejor sabor. Nuestra misión es ofrecer calidad, abundancia y precios justos.</p>
   </section>
 
-  <section class="contact" id="contact">
-    <h2 class="text-dynamic">Contacto</h2>
-    <p class="text-dynamic">¿Querés empezar hoy mismo? Escribinos directamente por WhatsApp.</p>
-    <a class="btn" href="https://wa.me/5491157223811" target="_blank">Enviar mensaje</a>
-    <p class="text-dynamic" style="margin-top: 20px;">O llamanos al <strong>11 5722-3811</strong></p>
+  <!-- MENÚ DESTACADO -->
+  <section class="menu">
+    <h2>Nuestras hamburguesas</h2>
+    <div class="burger-list">
+
+      <div class="burger-card">
+        <img src="/images/burger1.jpg" alt="Bacon Smash" />
+        <h3>Bacon Smash</h3>
+        <p>Doble carne, cheddar, panceta crocante y salsa especial.</p>
+      </div>
+
+      <div class="burger-card">
+        <img src="/images/burger2.jpg" alt="Clásica Doble" />
+        <h3>Clásica Doble</h3>
+        <p>Pan casero, doble medallón de carne, lechuga, tomate y cheddar.</p>
+      </div>
+
+      <div class="burger-card">
+        <img src="/images/burger3.jpg" alt="Veggie Corner" />
+        <h3>Veggie Corner</h3>
+        <p>Hamburguesa de lentejas con verduras asadas y alioli vegano.</p>
+      </div>
+
+    </div>
   </section>
 
-  <footer>
-    <p class="text-dynamic">© 2025 BSO Web Studio – Sitios web sin vueltas</p>
-  </footer>
-</Layout>
+  <!-- HORARIOS -->
+  <section class="hours">
+    <h2>🕐 Horarios</h2>
+    <p>Jueves a domingo</p>
+    <p>De 20:00 a 00:30</p>
+  </section>
+
+  <!-- CONTACTO -->
+  <section class="contact">
+    <h2>📱 Contacto</h2>
+    <p>Instagram: <a href="https://instagram.com/bigcorner2024" target="_blank">@bigcorner2024</a></p>
+    <p>WhatsApp: <a href="https://wa.me/5491132776974" target="_blank">1132776974</a></p>
+  </section>
+
+</main>
