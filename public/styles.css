@@ -263,7 +263,9 @@ img {
   font-style: normal;
   font-weight: bold;
   color: var(--text-color);
+  text-align: right;
 }
+
 
 /* === Contacto === */
 .contact {
