@@ -163,10 +163,23 @@ img {
   width: 250px;
   cursor: pointer;
   transition: transform 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 
 .burger-card:hover {
   transform: translateY(-5px);
+}
+
+.burger-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 0.75rem;
+  display: block;
 }
 
 /* === Sobre Nosotros === */
@@ -184,16 +197,27 @@ img {
   text-align: center;
 }
 
+.reviews h2 {
+  margin-bottom: 1.5rem;
+}
+
+#reviews-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
 .review {
-  border: 1px solid var(--border-color);
-  padding: 1rem;
-  margin: 1rem auto;
-  max-width: 600px;
-  border-radius: 6px;
-  font-style: italic;
   background-color: var(--bg-color);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 1rem;
+  font-style: italic;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
   position: relative;
-  overflow: hidden;
+  text-align: left;
 }
 
 .review::before {
@@ -201,9 +225,18 @@ img {
   position: absolute;
   top: -10px;
   left: -10px;
-  font-size: 8rem;
+  font-size: 6rem;
   color: var(--border-color);
   opacity: 0.1;
+  line-height: 1;
+}
+
+.review span {
+  display: block;
+  margin-top: 0.75rem;
+  font-style: normal;
+  font-weight: bold;
+  color: var(--text-color);
 }
 
 /* === Contacto === */
