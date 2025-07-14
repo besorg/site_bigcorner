@@ -192,6 +192,18 @@ img {
   border-radius: 6px;
   font-style: italic;
   background-color: var(--bg-color);
+  position: relative;
+  overflow: hidden;
+}
+
+.review::before {
+  content: "\201C";
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  font-size: 8rem;
+  color: var(--border-color);
+  opacity: 0.1;
 }
 
 /* === Contacto === */
@@ -300,12 +312,4 @@ img {
   background-color: var(--footer-bg);
   color: var(--footer-text);
   margin-top: 2rem;
-}
-
-.footer img {
-  width: 20px;
-  height: 20px;
-  vertical-align: middle;
-  margin-right: 6px;
-  border-radius: 4px;
 }
