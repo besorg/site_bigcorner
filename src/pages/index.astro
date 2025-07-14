@@ -31,14 +31,7 @@ import Layout from '../layouts/Layout.astro';
 
   <section class="reviews" id="reviews">
     <h2>Lo que dicen nuestros clientes</h2>
-    <div class="review">
-      <p>“¡La Bacon Smash es la mejor hamburguesa que probé en mi vida!”</p>
-      <span>- Mauro</span>
-    </div>
-    <div class="review">
-      <p>“Comida riquísima y atención de 10. ¡Muy recomendable!”</p>
-      <span>- Florencia</span>
-    </div>
+    <div id="reviews-container"></div>
   </section>
 
   <div id="burger-modal" class="modal hidden">
@@ -90,18 +83,19 @@ import Layout from '../layouts/Layout.astro';
       .then(res => res.text())
       .then(csvText => {
         const parsed = Papa.parse(csvText, { header: true });
-        const rows = parsed.data.filter(row => row.name && row.image);
+        const rows = parsed.data;
 
-        const products = rows.map(row => ({
-          name: row.name,
-          description: row.description,
-          image: row.image,
-          price: row.price
+        const products = rows.filter(r => r.name && r.image).map(r => ({
+          name: r.name,
+          description: r.description,
+          image: r.image,
+          price: r.price
         }));
 
-        const whatsapp = rows.find(row => row.whatsapp)?.whatsapp?.trim() || '5491132776974';
-        window.dynamicProducts = products;
+        const whatsappRow = rows.find(r => r.whatsapp);
+        const whatsapp = whatsappRow?.whatsapp?.trim() || '5491132776974';
         window.dynamicWhatsapp = whatsapp;
+        window.dynamicProducts = products;
 
         const list = document.getElementById('burger-list');
         list.innerHTML = products.map((product, index) => `
@@ -112,6 +106,15 @@ import Layout from '../layouts/Layout.astro';
             <p class="price">$${product.price}</p>
           </div>
         `).join('');
+
+        const reviews = rows
+          .filter(r => r.reviews && r.reviews.includes('|'))
+          .map(r => {
+            const [quote, author] = r.reviews.split('|');
+            return `<div class="review"><p>“${quote.trim()}”</p><span>- ${author.trim()}</span></div>`;
+          });
+
+        document.getElementById('reviews-container').innerHTML = reviews.join('');
       });
   </script>
 </Layout>

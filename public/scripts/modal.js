@@ -1,68 +1,61 @@
-const whatsapp = import.meta.env?.PUBLIC_WHATSAPP || "5491132776974"; // fallback
+const products = window.dynamicProducts || [];
+const whatsapp = window.dynamicWhatsapp || "5491132776974";
 
 window.openModalFromList = function(index) {
-  const product = window.dynamicProducts?.[index];
-  if (!product) return;
-
   const modal = document.getElementById('burger-modal');
-  modal.classList.remove('hidden');
-
-  // Guardar el índice actual para uso posterior
-  modal.dataset.index = index;
+  const product = products[index];
 
   document.getElementById('modal-img').src = product.image;
   document.getElementById('modal-title').textContent = product.name;
   document.getElementById('modal-description').textContent = product.description;
   document.getElementById('product-name').value = product.name;
+  document.getElementById('quantity').value = 1;
+  document.getElementById('order-total').textContent = `$${product.price}`;
 
-  const priceText = document.getElementById('modal-price');
-  priceText.textContent = `Precio unitario: $${product.price}`;
-
-  updateTotalPrice();
+  modal.dataset.productIndex = index;
+  modal.classList.remove('hidden');
 };
 
 window.closeModal = function() {
   document.getElementById('burger-modal').classList.add('hidden');
 };
 
-// Cierra al hacer clic fuera del modal
-window.addEventListener('click', function (event) {
+// Cerrar al hacer clic fuera del modal
+document.addEventListener('click', function (event) {
   const modal = document.getElementById('burger-modal');
-  const content = document.querySelector('.modal-content');
-  if (!modal.classList.contains('hidden') && !content.contains(event.target)) {
+  const modalContent = modal.querySelector('.modal-content');
+
+  if (!modal.classList.contains('hidden') && !modalContent.contains(event.target)) {
     closeModal();
   }
 });
 
-// Actualiza el total al cambiar cantidad
-document.addEventListener('input', function (event) {
-  if (event.target.id === 'quantity') {
-    updateTotalPrice();
-  }
+// Actualizar total al cambiar cantidad
+document.addEventListener('DOMContentLoaded', function () {
+  const qtyInput = document.getElementById('quantity');
+  qtyInput.addEventListener('input', function () {
+    const modal = document.getElementById('burger-modal');
+    const index = parseInt(modal.dataset.productIndex, 10);
+    const product = products[index];
+    const qty = parseInt(qtyInput.value, 10) || 1;
+    const total = product.price * qty;
+    document.getElementById('order-total').textContent = `$${total}`;
+  });
 });
-
-function updateTotalPrice() {
-  const modal = document.getElementById('burger-modal');
-  const index = parseInt(modal.dataset.index, 10);
-  const quantity = parseInt(document.getElementById('quantity').value, 10) || 1;
-  const product = window.dynamicProducts?.[index];
-
-  const total = (parseFloat(product?.price || 0) * quantity).toFixed(2);
-  const totalPrice = document.getElementById('modal-total');
-  totalPrice.textContent = `Total: $${total}`;
-}
 
 window.sendOrder = function(event) {
   event.preventDefault();
-  const name = document.getElementById('product-name').value;
+
+  const modal = document.getElementById('burger-modal');
+  const index = parseInt(modal.dataset.productIndex, 10);
+  const product = products[index];
+
   const qty = document.getElementById('quantity').value;
   const address = document.getElementById('address').value;
   const comment = document.getElementById('comment').value;
 
-  const text = encodeURIComponent(
-    `Hola! Quiero pedir ${qty} ${name}\nDirección: ${address}\n${comment ? 'Comentario: ' + comment : ''}`
-  );
-
+  const text = encodeURIComponent(`Hola! Quiero pedir ${qty} ${product.name}\nDirección: ${address}\n${comment ? 'Comentario: ' + comment : ''}`);
   window.open(`https://wa.me/${whatsapp}?text=${text}`, '_blank');
+
   closeModal();
 };
