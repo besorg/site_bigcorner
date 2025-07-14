@@ -79,13 +79,13 @@ import Layout from '../layouts/Layout.astro';
     <p>&copy; <script>document.write(new Date().getFullYear())</script> BIG CORNER. Todos los derechos reservados.</p>
   </footer>
 
-  <!-- Librería PapaParse -->
+  <!-- PapaParse -->
   <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js" defer></script>
 
-  <!-- Script de modales -->
+  <!-- Modal logic -->
   <script src="/scripts/modal.js" type="module"></script>
 
-  <!-- Scripts de carga de datos -->
+  <!-- Carga de datos -->
   <script>
     window.addEventListener('DOMContentLoaded', () => {
       const baseId = '1oSXRJkVeD3napDd9bltITSA4snw4uqOgXzLtfav05yo';
@@ -97,7 +97,19 @@ import Layout from '../layouts/Layout.astro';
       };
 
       function fetchCSV(url) {
-        return fetch(url).then(res => res.text()).then(csv => Papa.parse(csv, { header: false }).data);
+        return fetch(url)
+          .then(res => res.text())
+          .then(csv => {
+            const parsed = Papa.parse(csv, { header: false }).data;
+            const headers = parsed[0].map(h => h.trim().toLowerCase());
+            return parsed.slice(1).map(row => {
+              const obj = {};
+              headers.forEach((key, i) => {
+                obj[key] = row[i]?.trim?.() ?? '';
+              });
+              return obj;
+            });
+          });
       }
 
       Promise.all([
@@ -136,6 +148,8 @@ import Layout from '../layouts/Layout.astro';
           .map(r => `<div class="review"><p>“${r.quote.trim()}”</p><span>- ${r.author.trim()}</span></div>`);
 
         document.getElementById('reviews-container').innerHTML = reviews.join('');
+      }).catch(err => {
+        console.error("Error cargando los datos:", err);
       });
     });
   </script>
