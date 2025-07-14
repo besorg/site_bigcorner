@@ -12,7 +12,8 @@ window.openModalFromList = function(index) {
   const img = document.getElementById('modal-img');
   const title = document.getElementById('modal-title');
   const description = document.getElementById('modal-description');
-  const priceDisplay = document.getElementById('order-total');
+  const unitPrice = document.getElementById('unit-price');
+  const totalDisplay = document.getElementById('order-total');
   const productName = document.getElementById('product-name');
   const quantityInput = document.getElementById('quantity');
 
@@ -20,9 +21,16 @@ window.openModalFromList = function(index) {
   img.alt = product.name;
   title.textContent = product.name;
   description.textContent = product.description;
-  priceDisplay.textContent = `$${product.price}`;
+  unitPrice.textContent = `$${product.price}`;
+  totalDisplay.textContent = `$${product.price}`;
   productName.value = product.name;
   quantityInput.value = 1;
+
+  // actualizar total al cambiar cantidad
+  quantityInput.oninput = () => {
+    const q = parseInt(quantityInput.value) || 1;
+    totalDisplay.textContent = `$${q * product.price}`;
+  };
 
   modal.classList.remove('hidden');
 };

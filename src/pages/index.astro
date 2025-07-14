@@ -43,7 +43,11 @@ import Layout from '../layouts/Layout.astro';
         <label for="quantity">Cantidad:</label>
         <input type="number" id="quantity" name="quantity" min="1" value="1" required />
 
-        <label><strong>Total:</strong> <span id="order-total">$0</span></label>
+<div class="price-line">
+  <label><strong>Precio por unidad:</strong> <span id="unit-price">$0</span></label>
+  <label><strong>Total:</strong> <span id="order-total">$0</span></label>
+</div>
+
 
         <label for="address">Dirección de entrega:</label>
         <input type="text" id="address" name="address" required />
