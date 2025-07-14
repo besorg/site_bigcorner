@@ -1,89 +1,107 @@
 ---
 import Layout from '../layouts/Layout.astro';
+const whatsapp = import.meta.env.PUBLIC_WHATSAPP;
+const products = [
+  {
+    name: 'Bacon Smash',
+    image: '/images/burger1.jpg',
+    description: 'Doble carne, cheddar, panceta crocante y salsa especial.',
+  },
+  {
+    name: 'Clásica Doble',
+    image: '/images/burger2.jpg',
+    description: 'Pan casero, doble medallón, lechuga, tomate y cheddar.',
+  },
+  {
+    name: 'Veggie Corner',
+    image: '/images/burger3.jpg',
+    description: 'Hamburguesa de lentejas con vegetales y alioli vegano.',
+  },
+];
 ---
 
 <Layout title="BIG CORNER - Hamburguesas">
-  <section class="hero">
-    <div class="hero-content">
-      <img src="/images/logo.png" alt="Logo de BIG CORNER" class="hero-main-logo" />
-
-      <p class="subtext">Hamburguesas caseras, contundentes y al mejor precio</p>
-
-      <div class="cta-banner">
-        <p>📍 Retiro en local o delivery en zona sur</p>
-        <p>🔥 Combos desde $3500</p>
-        <p>🕐 Jueves a domingo de 20:00 a 00:30</p>
-      </div>
-
-      <img src="/images/hero-burger.jpg" alt="Hamburguesa principal" class="hero-image" />
-
-      <a class="btn" href="https://wa.me/5491132776974?text=Hola!%20Quiero%20hacer%20un%20pedido%20en%20BIG%20CORNER" target="_blank">
-        Hacé tu pedido por WhatsApp
-      </a>
-    </div>
-  </section>
-
-  <section id="about" class="about">
-    <h2>¿Quiénes somos?</h2>
-    <p>En BIG CORNER preparamos hamburguesas caseras con ingredientes frescos y recetas irresistibles. Nuestro objetivo es ofrecer sabor, calidad y abundancia sin romper tu bolsillo.</p>
-  </section>
-
-  <section id="menu" class="menu">
+  <section class="menu">
     <h2>Menú</h2>
     <div class="burger-list">
-      <div class="burger-card">
-        <img src="/images/burger1.jpg" alt="Bacon Smash" />
-        <h3>Bacon Smash</h3>
-        <p>Doble carne, cheddar, panceta crocante y salsa especial.</p>
-      </div>
-      <div class="burger-card">
-        <img src="/images/burger2.jpg" alt="Clásica Doble" />
-        <h3>Clásica Doble</h3>
-        <p>Pan casero, doble medallón, lechuga, tomate y cheddar.</p>
-      </div>
-      <div class="burger-card">
-        <img src="/images/burger3.jpg" alt="Veggie Corner" />
-        <h3>Veggie Corner</h3>
-        <p>Hamburguesa de lentejas con vegetales y alioli vegano.</p>
-      </div>
+      {products.map((product, index) => (
+        <div class="burger-card" onclick={`openModal(${index})`}>
+          <img src={product.image} alt={product.name} />
+          <h3>{product.name}</h3>
+          <p>{product.description}</p>
+        </div>
+      ))}
     </div>
   </section>
 
-  <section id="reviews" class="reviews">
-    <h2>Lo que dice la gente</h2>
-    <div class="review-list">
-      <div class="review-card">
-        <p>“Las pedimos todos los viernes. Riquísimas y siempre a tiempo.”</p>
-        <span>– Diego, Avellaneda</span>
-      </div>
-      <div class="review-card">
-        <p>“La veggie me sorprendió. Y soy carnívora eh.”</p>
-        <span>– Ana, Lanús</span>
-      </div>
-      <div class="review-card">
-        <p>“La panceta es obscenamente buena. 10/10.”</p>
-        <span>– Marcos, Wilde</span>
-      </div>
+  <!-- Modal -->
+  <div id="burger-modal" class="modal hidden">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <img id="modal-img" src="" alt="Hamburguesa" />
+      <h3 id="modal-title"></h3>
+      <p id="modal-description"></p>
+      <form id="order-form" onsubmit="sendOrder(event)">
+        <label for="quantity">Cantidad:</label>
+        <input type="number" id="quantity" name="quantity" min="1" value="1" required />
+
+        <label for="address">Dirección de entrega:</label>
+        <input type="text" id="address" name="address" required />
+
+        <label for="comment">Comentario adicional:</label>
+        <textarea id="comment" name="comment"></textarea>
+
+        <input type="hidden" id="product-name" name="product-name" />
+        <button type="submit">Pedir por WhatsApp</button>
+      </form>
     </div>
-  </section>
+  </div>
 
-  <section id="hours" class="hours">
-    <h2>Horarios</h2>
-    <p>Jueves a domingo</p>
-    <p>20:00 a 00:30</p>
-  </section>
+  <script type="module">
+    const products = [
+      {
+        name: 'Bacon Smash',
+        image: '/images/burger1.jpg',
+        description: 'Doble carne, cheddar, panceta crocante y salsa especial.'
+      },
+      {
+        name: 'Clásica Doble',
+        image: '/images/burger2.jpg',
+        description: 'Pan casero, doble medallón, lechuga, tomate y cheddar.'
+      },
+      {
+        name: 'Veggie Corner',
+        image: '/images/burger3.jpg',
+        description: 'Hamburguesa de lentejas con vegetales y alioli vegano.'
+      }
+    ];
 
-  <section id="contact" class="contact">
-    <h2>Contacto</h2>
-    <p>Instagram: <a href="https://instagram.com/bigcorner2024" target="_blank">@bigcorner2024</a></p>
-    <p>WhatsApp: <a href="https://wa.me/5491132776974" target="_blank">1132776974</a></p>
-  </section>
+    const whatsapp = import.meta.env.PUBLIC_WHATSAPP;
 
-  <section id="cta-final" class="cta-final">
-    <h2>¿Todavía no probaste BIG CORNER?</h2>
-    <p>Hamburguesas caseras, combos irresistibles y atención al instante.<br /> No te quedes con hambre.</p>
-    <a class="btn" href="https://wa.me/5491132776974?text=Hola!%20Quiero%20hacer%20un%20pedido%20en%20BIG%20CORNER" target="_blank">
-      Pedí ahora por WhatsApp
-    </a>
-  </section>
+    window.openModal = function(index) {
+      const modal = document.getElementById('burger-modal');
+      const product = products[index];
+      document.getElementById('modal-img').src = product.image;
+      document.getElementById('modal-title').textContent = product.name;
+      document.getElementById('modal-description').textContent = product.description;
+      document.getElementById('product-name').value = product.name;
+      modal.classList.remove('hidden');
+    }
+
+    window.closeModal = function() {
+      document.getElementById('burger-modal').classList.add('hidden');
+    }
+
+    window.sendOrder = function(event) {
+      event.preventDefault();
+      const name = document.getElementById('product-name').value;
+      const qty = document.getElementById('quantity').value;
+      const address = document.getElementById('address').value;
+      const comment = document.getElementById('comment').value;
+
+      const text = encodeURIComponent(`Hola! Quiero pedir ${qty} ${name}\nDirección: ${address}\n${comment ? 'Comentario: ' + comment : ''}`);
+      window.open(`https://wa.me/${whatsapp}?text=${text}`, '_blank');
+      window.closeModal();
+    }
+  </script>
 </Layout>
