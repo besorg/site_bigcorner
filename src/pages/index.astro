@@ -21,6 +21,20 @@ const products = [
 ---
 
 <Layout title="BIG CORNER - Hamburguesas">
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-text">
+        <img src="/images/logo.png" alt="Logo BIG CORNER" style="height: 80px; margin-bottom: 1rem;" />
+        <h1>Las mejores hamburguesas al mejor precio</h1>
+        <p>De jueves a domingo de 20:00 a 00:30</p>
+        <a class="btn" href="https://wa.me/${whatsapp}" target="_blank">Hacenos tu pedido</a>
+      </div>
+      <div class="hero-image">
+        <img src="/images/burger1.jpg" alt="Hamburguesa" />
+      </div>
+    </div>
+  </section>
+
   <section class="menu">
     <h2>Menú</h2>
     <div class="burger-list">
@@ -31,6 +45,23 @@ const products = [
           <p>{product.description}</p>
         </div>
       ))}
+    </div>
+  </section>
+
+  <section class="about" id="about">
+    <h2>Sobre Nosotros</h2>
+    <p>Somos BIG CORNER, una hamburguesería de barrio con pasión por el sabor. Cada producto es hecho con ingredientes frescos, pan artesanal y recetas que te van a dejar con ganas de más.</p>
+  </section>
+
+  <section class="reviews" id="reviews">
+    <h2>Lo que dicen nuestros clientes</h2>
+    <div class="review">
+      <p>“¡La Bacon Smash es la mejor hamburguesa que probé en mi vida!”</p>
+      <span>- Mauro</span>
+    </div>
+    <div class="review">
+      <p>“Comida riquísima y atención de 10. ¡Muy recomendable!”</p>
+      <span>- Florencia</span>
     </div>
   </section>
 
@@ -76,7 +107,7 @@ const products = [
       }
     ];
 
-    const whatsapp = import.meta.env.PUBLIC_WHATSAPP;
+    const whatsapp = "" + import.meta.env.PUBLIC_WHATSAPP;
 
     window.openModal = function(index) {
       const modal = document.getElementById('burger-modal');
