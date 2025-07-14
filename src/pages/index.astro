@@ -8,7 +8,7 @@ import Layout from '../layouts/Layout.astro';
       <div class="hero-text">
         <h1>Las mejores hamburguesas al mejor precio</h1>
         <p>De jueves a domingo de 20:00 a 00:30</p>
-        <div style="margin-top: 1rem;">
+        <div style="margin-top: 1rem">
           <a class="btn hero-btn" href="https://wa.me/5491132776974" target="_blank">Hacenos tu pedido</a>
         </div>
       </div>
@@ -41,29 +41,27 @@ import Layout from '../layouts/Layout.astro';
     </div>
   </section>
 
-<div id="burger-modal" class="modal hidden">
-  <div class="modal-content">
-    <span class="close" onclick="closeModal()">&times;</span>
-    <img id="modal-img" src="" alt="Hamburguesa" />
-    <h3 id="modal-title"></h3>
-    <p id="modal-description"></p>
-    <p id="modal-price" class="price"></p>
-    <p id="modal-total" class="price"></p>
-    <form id="order-form" onsubmit="sendOrder(event)">
-      <label for="quantity">Cantidad:</label>
-      <input type="number" id="quantity" name="quantity" min="1" value="1" required />
+  <div id="burger-modal" class="modal hidden">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <img id="modal-img" src="" alt="Hamburguesa" />
+      <h3 id="modal-title"></h3>
+      <p id="modal-description"></p>
+      <form id="order-form" onsubmit="sendOrder(event)">
+        <label for="quantity">Cantidad:</label>
+        <input type="number" id="quantity" name="quantity" min="1" value="1" required />
 
-      <label for="address">Dirección de entrega:</label>
-      <input type="text" id="address" name="address" required />
+        <label for="address">Dirección de entrega:</label>
+        <input type="text" id="address" name="address" required />
 
-      <label for="comment">Comentario adicional:</label>
-      <textarea id="comment" name="comment"></textarea>
+        <label for="comment">Comentario adicional:</label>
+        <textarea id="comment" name="comment"></textarea>
 
-      <input type="hidden" id="product-name" name="product-name" />
-      <button type="submit">Pedir por WhatsApp</button>
-    </form>
+        <input type="hidden" id="product-name" name="product-name" />
+        <button type="submit">Pedir por WhatsApp</button>
+      </form>
+    </div>
   </div>
-</div>
 
   <section class="contact" id="contact">
     <h2>Contacto</h2>
@@ -80,21 +78,31 @@ import Layout from '../layouts/Layout.astro';
 
   <footer class="footer">
     <p>
+      <img src="/images/favicon-bso.png" alt="BSO Logo" />
       Sitio desarrollado por <a href="https://marketing-bso.netlify.app/" target="_blank" style="color: inherit; text-decoration: underline;">BSO Web Studio</a>
     </p>
     <p>&copy; <script>document.write(new Date().getFullYear())</script> BIG CORNER. Todos los derechos reservados.</p>
   </footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
   <script src="/scripts/modal.js" type="module"></script>
   <script>
-    fetch('https://docs.google.com/spreadsheets/d/1oSXRJkVeD3napDd9bltITSA4snw4uqOgXzLtfav05yo/export?format=csv')
+    fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vSIE2W9qp2LKhZGC6F0_hW6BL0dxsR4PlYOaMjB5BZT7YDCcDe1SNNr1Go4DsV5BNb2vylNSXG0ulID/pub?output=csv')
       .then(res => res.text())
-      .then(data => {
-        const lines = data.split('\n').filter(l => l.trim());
-        const products = lines.slice(1).map(line => {
-          const [name, description, image, price] = line.split(',');
-          return { name, description, image, price };
-        });
+      .then(csvText => {
+        const parsed = Papa.parse(csvText, { header: true });
+        const rows = parsed.data.filter(row => row.name && row.image);
+
+        const products = rows.map(row => ({
+          name: row.name,
+          description: row.description,
+          image: row.image,
+          price: row.price
+        }));
+
+        const whatsapp = rows[0]?.whatsapp?.trim() || '5491132776974';
+        window.dynamicProducts = products;
+        window.dynamicWhatsapp = whatsapp;
 
         const list = document.getElementById('burger-list');
         list.innerHTML = products.map((product, index) => `
@@ -105,7 +113,6 @@ import Layout from '../layouts/Layout.astro';
             <p class="price">$${product.price}</p>
           </div>
         `).join('');
-        window.dynamicProducts = products;
       });
   </script>
 </Layout>
