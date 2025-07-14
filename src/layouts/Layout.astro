@@ -10,21 +10,28 @@ const { title } = Astro.props;
     <link rel="stylesheet" href="/styles.css" />
     <link rel="icon" type="image/png" href="/images/favicon.png" />
   </head>
-  <body>
-    <header>
-      <nav class="navbar">
-        <img src="/images/favicon.png" alt="Logo" class="logo" />
+  <body class="light">
+    <header class="header">
+      <nav class="navbar container">
+        <div class="logo-area">
+          <img src="/images/favicon.png" alt="Logo BIG CORNER" class="logo" />
+          <span class="brand-name">BIG CORNER</span>
+        </div>
         <ul class="nav-links">
           <li><a href="#menu">Menú</a></li>
           <li><a href="#about">Sobre Nosotros</a></li>
           <li><a href="#reviews">Reseñas</a></li>
           <li><a href="#contact">Contacto</a></li>
-          <li><button id="toggle-theme">🌙</button></li>
+          <li>
+            <button id="toggle-theme" class="theme-toggle">🌙</button>
+          </li>
         </ul>
       </nav>
     </header>
 
-    <slot />
+    <main>
+      <slot />
+    </main>
 
     <script>
       const toggle = document.getElementById('toggle-theme');
