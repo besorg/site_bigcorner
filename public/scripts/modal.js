@@ -2,6 +2,9 @@ const products = window.dynamicProducts || [];
 const whatsapp = window.dynamicWhatsapp || "5491132776974";
 
 window.openModalFromList = function(index) {
+  const products = window.dynamicProducts || [];
+  const whatsapp = window.dynamicWhatsapp || "5491132776974";
+
   const modal = document.getElementById('burger-modal');
   const product = products[index];
 
