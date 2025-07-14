@@ -87,7 +87,7 @@ import Layout from '../layouts/Layout.astro';
 
   <script src="/scripts/modal.js" type="module"></script>
   <script>
-    fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vSIE2W9qp2LKhZGC6F0_hW6BL0dxsR4PlYOaMjB5BZT7YDCcDe1SNNr1Go4DsV5BNb2vylNSXG0ulID/pub?output=csv')
+    fetch('https://docs.google.com/spreadsheets/d/1oSXRJkVeD3napDd9bltITSA4snw4uqOgXzLtfav05yo/export?format=csv')
       .then(res => res.text())
       .then(data => {
         const lines = data.split('\n').filter(l => l.trim());
