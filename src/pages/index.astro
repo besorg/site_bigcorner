@@ -97,7 +97,7 @@ import Layout from '../layouts/Layout.astro';
       };
 
       function fetchCSV(url) {
-        return fetch(url).then(res => res.text()).then(csv => Papa.parse(csv, { header: true }).data);
+        return fetch(url).then(res => res.text()).then(csv => Papa.parse(csv, { header: false }).data);
       }
 
       Promise.all([
