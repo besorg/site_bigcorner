@@ -1,111 +1,40 @@
-/* styles.css */
-
+/* ==== GLOBAL RESET ==== */
 body {
+  font-family: sans-serif;
   margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background-color: #fff;
-  color: #222;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-body.dark {
-  background-color: #111;
-  color: #eee;
-}
-
-header {
-  background-color: #111;
-  color: white;
-  padding: 1rem;
-}
-
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  max-width: 960px;
-  margin: 0 auto;
-}
-
-.logo {
-  height: 50px;
-}
-
-.nav-links {
-  display: flex;
-  gap: 1rem;
-  list-style: none;
   padding: 0;
+  background-color: #fafafa;
+  color: #333;
 }
 
-.nav-links a {
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
+h2 {
+  text-align: center;
+  margin-top: 2rem;
+  font-size: 2rem;
 }
 
-.nav-links button {
-  background: none;
-  border: none;
-  color: white;
-  font-size: 1.2rem;
-  cursor: pointer;
-}
-
-.hero {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  padding: 2rem;
-  max-width: 960px;
-  margin: auto;
-}
-
-.hero-text {
-  flex: 1;
-}
-
-.hero-image img {
-  max-width: 300px;
-  border-radius: 12px;
-}
-
-.btn {
-  display: inline-block;
-  background-color: #e63946;
-  color: white;
-  padding: 0.75rem 1.5rem;
-  text-decoration: none;
-  border-radius: 8px;
-  margin-top: 1rem;
-}
-
-.menu {
-  max-width: 960px;
-  margin: 2rem auto;
-  padding: 0 1rem;
-}
-
+/* ==== BURGER LIST ==== */
 .burger-list {
   display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
   justify-content: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+  padding: 2rem;
 }
 
 .burger-card {
-  width: 280px;
-  border: 1px solid #ccc;
+  width: 300px;
+  background-color: white;
   border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   padding: 1rem;
+  text-align: center;
   cursor: pointer;
-  background-color: #fafafa;
   transition: transform 0.2s ease;
 }
 
 .burger-card:hover {
-  transform: scale(1.02);
+  transform: scale(1.03);
 }
 
 .burger-card img {
@@ -114,30 +43,19 @@ header {
   border-radius: 8px;
 }
 
-.about, .reviews {
-  max-width: 960px;
-  margin: 2rem auto;
-  padding: 0 1rem;
-}
-
-.review {
-  background-color: #f2f2f2;
-  padding: 1rem;
-  border-radius: 8px;
-  margin-bottom: 1rem;
-}
-
+/* ==== MODAL ==== */
 .modal {
   position: fixed;
-  top: 0;
+  z-index: 1000;
   left: 0;
-  right: 0;
-  bottom: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
   background-color: rgba(0, 0, 0, 0.6);
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1000;
 }
 
 .modal.hidden {
@@ -145,51 +63,63 @@ header {
 }
 
 .modal-content {
-  background-color: white;
+  background-color: #fff;
   padding: 2rem;
-  border-radius: 12px;
-  width: 100%;
+  border-radius: 10px;
+  width: 90%;
   max-width: 500px;
   position: relative;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
 }
 
 .modal-content img {
   width: 100%;
+  height: auto;
   border-radius: 8px;
+  margin-bottom: 1rem;
 }
 
-.modal-content .close {
+.modal-content h3 {
+  margin: 0.5rem 0;
+}
+
+.modal-content form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.modal-content label {
+  font-weight: bold;
+}
+
+.modal-content input,
+.modal-content textarea {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.modal-content button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 0.75rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
+}
+
+.modal-content button:hover {
+  background-color: #218838;
+}
+
+.close {
   position: absolute;
   top: 1rem;
   right: 1rem;
   font-size: 1.5rem;
   cursor: pointer;
-}
-
-form label {
-  display: block;
-  margin-top: 1rem;
-}
-
-form input,
-form textarea {
-  width: 100%;
-  padding: 0.5rem;
-  margin-top: 0.25rem;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-}
-
-form button[type="submit"] {
-  margin-top: 1rem;
-  background-color: #28a745;
-  color: white;
-  border: none;
-  padding: 0.75rem;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-form button[type="submit"]:hover {
-  background-color: #218838;
+  color: #666;
 }
