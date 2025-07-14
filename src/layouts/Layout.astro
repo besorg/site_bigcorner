@@ -11,6 +11,18 @@ const { title } = Astro.props;
     <link rel="icon" type="image/png" href="/images/favicon.png" />
   </head>
   <body>
+    <header class="navbar">
+      <nav>
+        <ul>
+          <li><a href="#about">Sobre Nosotros</a></li>
+          <li><a href="#menu">Menú</a></li>
+          <li><a href="#hours">Horarios</a></li>
+          <li><a href="#contact">Contacto</a></li>
+          <li><button id="toggle-theme">☀️</button></li>
+        </ul>
+      </nav>
+    </header>
+
     <slot />
 
     <script>

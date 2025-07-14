@@ -1,59 +1,62 @@
-<main>
+---
+import Layout from '../layouts/Layout.astro';
+---
 
-  <!-- HERO SECTION -->
+<Layout title="BIG CORNER - Hamburguesas">
   <section class="hero">
     <div class="hero-content">
       <h1>🍔 BIG CORNER</h1>
-      <p class="subtext">Las mejores hamburguesas al mejor precio</p>
+      <p class="subtext">Hamburguesas caseras, contundentes y al mejor precio</p>
+
+      <div class="cta-banner">
+        <p>📍 Retiro en local o delivery en zona sur</p>
+        <p>🔥 Combos desde $3500</p>
+        <p>🕐 Jueves a domingo de 20:00 a 00:30</p>
+      </div>
+
       <img src="/images/hero-burger.jpg" alt="Hamburguesa principal" class="hero-image" />
-      <a class="btn" href="https://wa.me/5491132776974" target="_blank">Hacé tu pedido por WhatsApp</a>
+
+      <a class="btn" href="https://wa.me/5491132776974?text=Hola!%20Quiero%20hacer%20un%20pedido%20en%20BIG%20CORNER" target="_blank">
+        Hacé tu pedido por WhatsApp
+      </a>
     </div>
   </section>
 
-  <!-- SOBRE NOSOTROS -->
-  <section class="about">
+  <section id="about" class="about">
     <h2>¿Quiénes somos?</h2>
-    <p>Somos una hamburguesería artesanal ubicada en el corazón del barrio. En BIG CORNER cocinamos con pasión, usando ingredientes frescos y recetas caseras para lograr el mejor sabor. Nuestra misión es ofrecer calidad, abundancia y precios justos.</p>
+    <p>En BIG CORNER preparamos hamburguesas caseras con ingredientes frescos y recetas irresistibles. Nuestro objetivo es ofrecer sabor, calidad y abundancia sin romper tu bolsillo.</p>
   </section>
 
-  <!-- MENÚ DESTACADO -->
-  <section class="menu">
-    <h2>Nuestras hamburguesas</h2>
+  <section id="menu" class="menu">
+    <h2>Menú</h2>
     <div class="burger-list">
-
       <div class="burger-card">
         <img src="/images/burger1.jpg" alt="Bacon Smash" />
         <h3>Bacon Smash</h3>
         <p>Doble carne, cheddar, panceta crocante y salsa especial.</p>
       </div>
-
       <div class="burger-card">
         <img src="/images/burger2.jpg" alt="Clásica Doble" />
         <h3>Clásica Doble</h3>
-        <p>Pan casero, doble medallón de carne, lechuga, tomate y cheddar.</p>
+        <p>Pan casero, doble medallón, lechuga, tomate y cheddar.</p>
       </div>
-
       <div class="burger-card">
         <img src="/images/burger3.jpg" alt="Veggie Corner" />
         <h3>Veggie Corner</h3>
-        <p>Hamburguesa de lentejas con verduras asadas y alioli vegano.</p>
+        <p>Hamburguesa de lentejas con vegetales y alioli vegano.</p>
       </div>
-
     </div>
   </section>
 
-  <!-- HORARIOS -->
-  <section class="hours">
-    <h2>🕐 Horarios</h2>
+  <section id="hours" class="hours">
+    <h2>Horarios</h2>
     <p>Jueves a domingo</p>
-    <p>De 20:00 a 00:30</p>
+    <p>20:00 a 00:30</p>
   </section>
 
-  <!-- CONTACTO -->
-  <section class="contact">
-    <h2>📱 Contacto</h2>
+  <section id="contact" class="contact">
+    <h2>Contacto</h2>
     <p>Instagram: <a href="https://instagram.com/bigcorner2024" target="_blank">@bigcorner2024</a></p>
     <p>WhatsApp: <a href="https://wa.me/5491132776974" target="_blank">1132776974</a></p>
   </section>
-
-</main>
+</Layout>
