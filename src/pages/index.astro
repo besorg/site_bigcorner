@@ -34,31 +34,30 @@ import Layout from '../layouts/Layout.astro';
     <div id="reviews-container"></div>
   </section>
 
-<div id="burger-modal" class="modal hidden">
-  <div class="modal-content">
-    <span class="close" onclick="closeModal()">&times;</span>
-    <img id="modal-img" src="" alt="Hamburguesa" />
-    <h3 id="modal-title"></h3>
-    <p id="modal-description"></p>
+  <div id="burger-modal" class="modal hidden">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <img id="modal-img" src="" alt="Hamburguesa" />
+      <h3 id="modal-title"></h3>
+      <p id="modal-description"></p>
 
-    <form id="order-form" onsubmit="sendOrder(event)">
-      <label for="quantity">Cantidad:</label>
-      <input type="number" id="quantity" name="quantity" min="1" value="1" required />
+      <form id="order-form" onsubmit="sendOrder(event)">
+        <label for="quantity">Cantidad:</label>
+        <input type="number" id="quantity" name="quantity" min="1" value="1" required />
 
-      <label><strong>Total:</strong> <span id="order-total">$0</span></label>
+        <label><strong>Total:</strong> <span id="order-total">$0</span></label>
 
-      <label for="address">Dirección de entrega:</label>
-      <input type="text" id="address" name="address" required />
+        <label for="address">Dirección de entrega:</label>
+        <input type="text" id="address" name="address" required />
 
-      <label for="comment">Comentario adicional:</label>
-      <textarea id="comment" name="comment"></textarea>
+        <label for="comment">Comentario adicional:</label>
+        <textarea id="comment" name="comment"></textarea>
 
-      <input type="hidden" id="product-name" name="product-name" />
-      <button type="submit">Pedir por WhatsApp</button>
-    </form>
+        <input type="hidden" id="product-name" name="product-name" />
+        <button type="submit">Pedir por WhatsApp</button>
+      </form>
+    </div>
   </div>
-</div>
-
 
   <section class="contact" id="contact">
     <h2>Contacto</h2>
@@ -80,25 +79,45 @@ import Layout from '../layouts/Layout.astro';
     <p>&copy; <script>document.write(new Date().getFullYear())</script> BIG CORNER. Todos los derechos reservados.</p>
   </footer>
 
+  <!-- Librería PapaParse -->
   <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js" defer></script>
+
+  <!-- Script de modales -->
   <script src="/scripts/modal.js" type="module"></script>
+
+  <!-- Scripts de carga de datos -->
   <script>
-    fetch('https://docs.google.com/spreadsheets/d/1oSXRJkVeD3napDd9bltITSA4snw4uqOgXzLtfav05yo/gviz/tq?tqx=out:csv')
-      .then(res => res.text())
-      .then(csvText => {
-        const parsed = Papa.parse(csvText, { header: true });
-        const rows = parsed.data;
+    window.addEventListener('DOMContentLoaded', () => {
+      const baseId = '1oSXRJkVeD3napDd9bltITSA4snw4uqOgXzLtfav05yo';
 
-        const products = rows.filter(r => r.name && r.image).map(r => ({
-          name: r.name,
-          description: r.description,
-          image: r.image,
-          price: r.price
-        }));
+      const urls = {
+        menu: `https://docs.google.com/spreadsheets/d/${baseId}/gviz/tq?tqx=out:csv&sheet=menu`,
+        whatsapp: `https://docs.google.com/spreadsheets/d/${baseId}/gviz/tq?tqx=out:csv&sheet=whatsapp`,
+        reviews: `https://docs.google.com/spreadsheets/d/${baseId}/gviz/tq?tqx=out:csv&sheet=reviews`
+      };
 
-        const whatsappRow = rows.find(r => r.whatsapp);
-        const whatsapp = whatsappRow?.whatsapp?.trim() || '5491132776974';
+      function fetchCSV(url) {
+        return fetch(url).then(res => res.text()).then(csv => Papa.parse(csv, { header: true }).data);
+      }
+
+      Promise.all([
+        fetchCSV(urls.menu),
+        fetchCSV(urls.whatsapp),
+        fetchCSV(urls.reviews)
+      ]).then(([menuRows, whatsappRows, reviewsRows]) => {
+        // WhatsApp
+        const whatsapp = whatsappRows[0]?.whatsapp?.trim() || '5491132776974';
         window.dynamicWhatsapp = whatsapp;
+
+        // Productos
+        const products = menuRows
+          .filter(row => row.name && row.image)
+          .map(row => ({
+            name: row.name,
+            description: row.description,
+            image: row.image,
+            price: row.price
+          }));
         window.dynamicProducts = products;
 
         const list = document.getElementById('burger-list');
@@ -111,14 +130,13 @@ import Layout from '../layouts/Layout.astro';
           </div>
         `).join('');
 
-        const reviews = rows
-          .filter(r => r.reviews && r.reviews.includes('|'))
-          .map(r => {
-            const [quote, author] = r.reviews.split('|');
-            return `<div class="review"><p>“${quote.trim()}”</p><span>- ${author.trim()}</span></div>`;
-          });
+        // Reseñas
+        const reviews = reviewsRows
+          .filter(r => r.quote && r.author)
+          .map(r => `<div class="review"><p>“${r.quote.trim()}”</p><span>- ${r.author.trim()}</span></div>`);
 
         document.getElementById('reviews-container').innerHTML = reviews.join('');
       });
+    });
   </script>
 </Layout>
