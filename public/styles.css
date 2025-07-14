@@ -85,6 +85,10 @@ nav a {
   text-align: center;
 }
 
+.menu h2 {
+  margin-bottom: 1rem;
+}
+
 .burger-list {
   display: flex;
   gap: 1.5rem;
@@ -163,7 +167,7 @@ nav a {
 .footer {
   background-color: var(--section-bg);
   text-align: center;
-  padding: 1rem;
+  padding: 1.5rem 1rem;
   font-size: 0.9rem;
   border-top: 1px solid var(--card-border);
 }
@@ -171,6 +175,13 @@ nav a {
 .footer a {
   color: var(--accent-color);
   text-decoration: none;
+}
+
+.footer img {
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+  margin-right: 0.5rem;
 }
 
 /* Modal */

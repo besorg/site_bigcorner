@@ -20,91 +20,102 @@ const products = [
 ];
 ---
 
-<Layout title="BIG CORNER - Hamburguesas">
-  <section class="hero">
-    <div class="hero-content">
-      <div class="hero-text">
-        <h1>Las mejores hamburguesas al mejor precio</h1>
-        <p>De jueves a domingo de 20:00 a 00:30</p>
-        <a class="btn" href={`https://wa.me/${whatsapp}`} target="_blank">Hacenos tu pedido</a>
-      </div>
-      <div class="hero-image">
-        <img src="/images/logo.png" alt="Logo BIG CORNER" style="max-width: 200px; border-radius: 12px;" />
-      </div>
-    </div>
-  </section>
-
-  <section class="menu" id="menu">
-    <h2>Menú</h2>
-    <div class="burger-list">
-      {products.map((product, index) => (
-        <div class="burger-card" onclick={`openModal(${index})`}>
-          <img src={product.image} alt={product.name} />
-          <h3>{product.name}</h3>
-          <p>{product.description}</p>
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BIG CORNER - Hamburguesas</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="icon" href="/images/favicon.png" type="image/png" />
+  </head>
+  <body>
+    <Layout title="BIG CORNER - Hamburguesas">
+      <section class="hero">
+        <div class="hero-content">
+          <div class="hero-text">
+            <h1>Las mejores hamburguesas al mejor precio</h1>
+            <p>De jueves a domingo de 20:00 a 00:30</p>
+            <a class="btn" href={`https://wa.me/${whatsapp}`} target="_blank">Hacenos tu pedido</a>
+          </div>
+          <div class="hero-image">
+            <img src="/images/logo.png" alt="Logo BIG CORNER" style="max-width: 200px; border-radius: 12px;" />
+          </div>
         </div>
-      ))}
-    </div>
-  </section>
+      </section>
 
-  <section class="about" id="about">
-    <h2>Sobre Nosotros</h2>
-    <p>Somos BIG CORNER, una hamburguesería de barrio con pasión por el sabor. Cada producto es hecho con ingredientes frescos, pan artesanal y recetas que te van a dejar con ganas de más.</p>
-  </section>
+      <section class="menu" id="menu">
+        <h2>Menú</h2>
+        <div class="burger-list">
+          {products.map((product, index) => (
+            <div class="burger-card" onclick={`openModal(${index})`}>
+              <img src={product.image} alt={product.name} />
+              <h3>{product.name}</h3>
+              <p>{product.description}</p>
+            </div>
+          ))}
+        </div>
+      </section>
 
-  <section class="reviews" id="reviews">
-    <h2>Lo que dicen nuestros clientes</h2>
-    <div class="review">
-      <p>“¡La Bacon Smash es la mejor hamburguesa que probé en mi vida!”</p>
-      <span>- Mauro</span>
-    </div>
-    <div class="review">
-      <p>“Comida riquísima y atención de 10. ¡Muy recomendable!”</p>
-      <span>- Florencia</span>
-    </div>
-  </section>
+      <section class="about" id="about">
+        <h2>Sobre Nosotros</h2>
+        <p>Somos BIG CORNER, una hamburguesería de barrio con pasión por el sabor. Cada producto es hecho con ingredientes frescos, pan artesanal y recetas que te van a dejar con ganas de más.</p>
+      </section>
 
-  <section class="contact" id="contact">
-    <h2>Contacto</h2>
-    <p>¿Querés hacer un pedido o tenés alguna consulta?</p>
-    <div class="contact-methods">
-      <a href={`https://wa.me/${whatsapp}`} target="_blank">
-        <img src="/images/whatsapp-icon.png" alt="WhatsApp" class="icon" /> Escribinos por WhatsApp
-      </a>
-      <a href="https://instagram.com/bigcorner2024" target="_blank">
-        <img src="/images/instagram-icon.png" alt="Instagram" class="icon" /> Seguinos en Instagram
-      </a>
-    </div>
-  </section>
+      <section class="reviews" id="reviews">
+        <h2>Lo que dicen nuestros clientes</h2>
+        <div class="review">
+          <p>“¡La Bacon Smash es la mejor hamburguesa que probé en mi vida!”</p>
+          <span>- Mauro</span>
+        </div>
+        <div class="review">
+          <p>“Comida riquísima y atención de 10. ¡Muy recomendable!”</p>
+          <span>- Florencia</span>
+        </div>
+      </section>
 
-  <footer class="footer">
-    <p>&copy; {new Date().getFullYear()} BIG CORNER. Todos los derechos reservados.</p>
-    <p>Diseñado por <a href="https://bso.ar" target="_blank">BSO Web Studio</a></p>
-    <link rel="icon" href="/images/favicon-bso.png" type="image/png" />
-  </footer>
+      <section class="contact" id="contact">
+        <h2>Contacto</h2>
+        <p>¿Querés hacer un pedido o tenés alguna consulta?</p>
+        <div class="contact-methods">
+          <a href={`https://wa.me/${whatsapp}`} target="_blank">
+            <img src="/images/whatsapp-icon.png" alt="WhatsApp" class="icon" /> Escribinos por WhatsApp
+          </a>
+          <a href="https://instagram.com/bigcorner2024" target="_blank">
+            <img src="/images/instagram-icon.png" alt="Instagram" class="icon" /> Seguinos en Instagram
+          </a>
+        </div>
+      </section>
 
-  <!-- Modal -->
-  <div id="burger-modal" class="modal hidden">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal()">&times;</span>
-      <img id="modal-img" src="" alt="Hamburguesa" />
-      <h3 id="modal-title"></h3>
-      <p id="modal-description"></p>
-      <form id="order-form" onsubmit="sendOrder(event)">
-        <label for="quantity">Cantidad:</label>
-        <input type="number" id="quantity" name="quantity" min="1" value="1" required />
+      <footer class="footer">
+        <p>&copy; {new Date().getFullYear()} BIG CORNER. Todos los derechos reservados.</p>
+        <p>Diseñado por <a href="https://marketing-bso.netlify.app/" target="_blank">BSO Web Studio</a></p>
+      </footer>
 
-        <label for="address">Dirección de entrega:</label>
-        <input type="text" id="address" name="address" required />
+      <!-- Modal -->
+      <div id="burger-modal" class="modal hidden">
+        <div class="modal-content">
+          <span class="close" onclick="closeModal()">&times;</span>
+          <img id="modal-img" src="" alt="Hamburguesa" />
+          <h3 id="modal-title"></h3>
+          <p id="modal-description"></p>
+          <form id="order-form" onsubmit="sendOrder(event)">
+            <label for="quantity">Cantidad:</label>
+            <input type="number" id="quantity" name="quantity" min="1" value="1" required />
 
-        <label for="comment">Comentario adicional:</label>
-        <textarea id="comment" name="comment"></textarea>
+            <label for="address">Dirección de entrega:</label>
+            <input type="text" id="address" name="address" required />
 
-        <input type="hidden" id="product-name" name="product-name" />
-        <button type="submit">Pedir por WhatsApp</button>
-      </form>
-    </div>
-  </div>
+            <label for="comment">Comentario adicional:</label>
+            <textarea id="comment" name="comment"></textarea>
 
-  <script src="/scripts/modal.js" type="module"></script>
-</Layout>
+            <input type="hidden" id="product-name" name="product-name" />
+            <button type="submit">Pedir por WhatsApp</button>
+          </form>
+        </div>
+      </div>
+
+      <script src="/scripts/modal.js" type="module"></script>
+    </Layout>
+  </body>
+</html>
