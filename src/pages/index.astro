@@ -44,18 +44,19 @@ const products = [
         </div>
       </section>
 
-      <section class="menu" id="menu">
-        <h2>Menú</h2>
-        <div class="burger-list">
-          {products.map((product, index) => (
-            <div class="burger-card" onclick={`openModal(${index})`}>
-              <img src={product.image} alt={product.name} />
-              <h3>{product.name}</h3>
-              <p>{product.description}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+<section class="menu" id="menu">
+  <h2>Menú</h2>
+  <p class="menu-subtitle">Tu pedido está a solo unos clics. Elegí tu hamburguesa favorita y te la llevamos a domicilio.</p>
+  <div class="burger-list">
+    {products.map((product, index) => (
+      <div class="burger-card" onclick={`openModal(${index})`}>
+        <img src={product.image} alt={product.name} />
+        <h3>{product.name}</h3>
+        <p>{product.description}</p>
+      </div>
+    ))}
+  </div>
+</section>
 
       <section class="about" id="about">
         <h2>Sobre Nosotros</h2>
