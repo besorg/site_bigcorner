@@ -176,6 +176,37 @@ p {
   margin-bottom: 0.5em;
 }
 
+/* REVIEWS */
+.reviews {
+  margin-top: 2em;
+}
+
+.review-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5em;
+  margin-top: 1.5em;
+}
+
+.review-card {
+  background-color: var(--card);
+  padding: 1em;
+  border-radius: 8px;
+  font-style: italic;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+
+.review-card p {
+  margin-bottom: 0.5em;
+}
+
+.review-card span {
+  display: block;
+  text-align: right;
+  font-weight: bold;
+  font-style: normal;
+}
+
 /* RESPONSIVE */
 @media (max-width: 600px) {
   .navbar ul {
@@ -190,4 +221,23 @@ p {
   .btn {
     font-size: 1em;
   }
+}
+
+.cta-final {
+  margin: 4em auto 2em;
+  text-align: center;
+  background-color: var(--card);
+  padding: 2em;
+  border-radius: 8px;
+  box-shadow: 0 0 12px rgba(0,0,0,0.08);
+}
+
+.cta-final h2 {
+  font-size: 1.8em;
+  margin-bottom: 0.5em;
+}
+
+.cta-final p {
+  font-size: 1.1em;
+  margin-bottom: 1.5em;
 }
