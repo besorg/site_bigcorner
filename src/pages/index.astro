@@ -87,7 +87,7 @@ import Layout from '../layouts/Layout.astro';
   <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
   <script src="/scripts/modal.js" type="module"></script>
   <script>
-    fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vSIE2W9qp2LKhZGC6F0_hW6BL0dxsR4PlYOaMjB5BZT7YDCcDe1SNNr1Go4DsV5BNb2vylNSXG0ulID/pub?output=csv')
+    fetch('https://docs.google.com/spreadsheets/d/1oSXRJkVeD3napDd9bltITSA4snw4uqOgXzLtfav05yo/gviz/tq?tqx=out:csv')
       .then(res => res.text())
       .then(csvText => {
         const parsed = Papa.parse(csvText, { header: true });
