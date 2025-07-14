@@ -1,6 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
-const whatsapp = import.meta.env.PUBLIC_WHATSAPP;
+const whatsapp = '5491132776974';
 const products = [
   {
     name: 'Bacon Smash',
@@ -26,7 +26,7 @@ const products = [
       <div class="hero-text">
         <h1>Las mejores hamburguesas al mejor precio</h1>
         <p>De jueves a domingo de 20:00 a 00:30</p>
-        <a class="btn" href="https://wa.me/${whatsapp}" target="_blank">Hacenos tu pedido</a>
+        <a class="btn hero-btn" href="https://wa.me/${whatsapp}" target="_blank">Hacenos tu pedido</a>
       </div>
       <div class="hero-image">
         <img src="/images/logo.png" alt="Logo BIG CORNER" style="max-width: 200px; border-radius: 12px;" />
@@ -103,7 +103,7 @@ const products = [
 
   <footer class="footer">
     <p>
-      <img src="/images/favicon.png" alt="Logo" />
+      <img src="/images/favicon-bso.png" alt="BSO Logo" />
       Sitio desarrollado por <a href="https://marketing-bso.netlify.app/" target="_blank" style="color: inherit; text-decoration: underline;">BSO Web Studio</a>
     </p>
   </footer>
