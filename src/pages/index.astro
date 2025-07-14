@@ -100,7 +100,7 @@ import Layout from '../layouts/Layout.astro';
           price: row.price
         }));
 
-        const whatsapp = rows[0]?.whatsapp?.trim() || '5491132776974';
+        const whatsapp = rows.find(row => row.whatsapp)?.whatsapp?.trim() || '5491132776974';
         window.dynamicProducts = products;
         window.dynamicWhatsapp = whatsapp;
 
