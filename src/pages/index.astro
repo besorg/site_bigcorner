@@ -11,7 +11,7 @@ import Layout from '../layouts/Layout.astro';
   <div class="hero-column">
     <h1>Las mejores hamburguesas al mejor precio</h1>
     <p>De jueves a domingo de 20:00 a 00:30</p>
-    <a class="btn hero-btn" href="https://wa.me/5491132776974" target="_blank">Hacenos tu pedido</a>
+    <a id="whatsapp-button" class="btn hero-btn" target="_blank">Hacenos tu pedido</a>
   </div>
 </div>
   </section>
@@ -118,6 +118,11 @@ import Layout from '../layouts/Layout.astro';
         // WhatsApp
         const whatsapp = whatsappRows[0]?.whatsapp?.trim() || '5491132776974';
         window.dynamicWhatsapp = whatsapp;
+
+const whatsappButton = document.getElementById('whatsapp-button');
+if (whatsappButton && whatsapp) {
+  whatsappButton.href = `https://wa.me/${whatsapp}`;
+}
 
         // Productos
         const products = menuRows
