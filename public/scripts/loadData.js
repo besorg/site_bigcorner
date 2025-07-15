@@ -5,40 +5,40 @@ window.addEventListener('DOMContentLoaded', () => {
       const parsed = Papa.parse(csvText, { header: true });
       const rows = parsed.data;
 
-      const products = rows.filter(row => row.name && row.image).map(row => ({
-        name: row.name,
-        description: row.description,
-        image: row.image,
-        price: row.price
+      const productos = rows.filter(row => row.nombre && row.imagen).map(row => ({
+        nombre: row.nombre,
+        descripcion: row.descripcion,
+        imagen: row.imagen,
+        precio: row.precio
       }));
 
-      const whatsapp = rows.find(row => row.whatsapp)?.whatsapp?.trim() || '5491132776974';
+      const whatsapp = '5491132776974';
 
-      const reviews = rows
-        .filter(row => row.reviews && row.reviews.includes('|'))
-        .map(row => {
-          const [quote, author] = row.reviews.split('|');
-          return { quote: quote.trim(), author: author.trim() };
-        });
+      const resenias = rows
+        .filter(row => row.cita && row.autor)
+        .map(row => ({
+          cita: row.cita.trim(),
+          autor: row.autor.trim()
+        }));
 
-      window.dynamicProducts = products;
+      window.dynamicProducts = productos;
       window.dynamicWhatsapp = whatsapp;
 
       const list = document.getElementById('burger-list');
-      list.innerHTML = products.map((product, index) => `
+      list.innerHTML = productos.map((producto, index) => `
         <div class="burger-card" onclick="openModalFromList(${index})">
-          <img src="${product.image}" alt="${product.name}" />
-          <h3>${product.name}</h3>
-          <p>${product.description}</p>
-          <p class="price">$${product.price}</p>
+          <img src="${producto.imagen}" alt="${producto.nombre}" />
+          <h3>${producto.nombre}</h3>
+          <p>${producto.descripcion}</p>
+          <p class="price">$${producto.precio}</p>
         </div>
       `).join('');
 
       const reviewsContainer = document.getElementById('reviews-container');
-      reviewsContainer.innerHTML = reviews.map(r => `
+      reviewsContainer.innerHTML = resenias.map(r => `
         <div class="review">
-          <p>“${r.quote}”</p>
-          <span>- ${r.author}</span>
+          <p>“${r.cita}”</p>
+          <span>- ${r.autor}</span>
         </div>
       `).join('');
     });
