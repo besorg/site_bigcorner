@@ -130,20 +130,20 @@ if (whatsappButton && whatsapp) {
         const products = menuRows
           .filter(row => row.nombre && row.imagen)
           .map(row => ({
-            name: row.nombre,
-            description: row.descripcion,
-            image: row.imagen,
-            price: row.precio
+            nombre: row.nombre,
+            descripcion: row.descripcion,
+            imagen: row.imagen,
+            precio: row.precio
           }));
         window.dynamicProducts = products;
 
         const list = document.getElementById('burger-list');
         list.innerHTML = products.map((product, index) => `
           <div class="burger-card" onclick="openModalFromList(${index})">
-            <img src="${product.image}" alt="${product.name}" />
-            <h3>${product.name}</h3>
-            <p>${product.description}</p>
-            <p class="price">$${product.price}</p>
+            <img src="${product.imagen}" alt="${product.nombre}" />
+            <h3>${product.nombre}</h3>
+            <p>${product.descripcion}</p>
+            <p class="price">$${product.precio}</p>
           </div>
         `).join('');
 
