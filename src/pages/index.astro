@@ -68,7 +68,7 @@ import Layout from '../layouts/Layout.astro';
       <a href="https://instagram.com/bigcorner2024" target="_blank">
         <img src="/images/instagram-icon.png" alt="Instagram" class="icon" />
       </a>
-      <a href="https://wa.me/5491132776974" target="_blank">
+      <a href="https://wa.me/5491132776974?text=%C2%A1Hola!%20Estoy%20visitando%20su%20sitio%20web%20y%20me%20gustar%C3%ADa%20hacer%20un%20pedido." target="_blank">
         <img src="/images/whatsapp-icon.png" alt="WhatsApp" class="icon" />
       </a>
     </div>
@@ -123,7 +123,7 @@ import Layout from '../layouts/Layout.astro';
 
 const whatsappButton = document.getElementById('whatsapp-button');
 if (whatsappButton && whatsapp) {
-  whatsappButton.href = `https://wa.me/${whatsapp}`;
+  whatsappButton.href = `https://wa.me/${whatsapp}?text=${encodeURIComponent("¡Hola! Estoy visitando su sitio web y me gustaría hacer un pedido.")}`;
 }
 
         // Productos
