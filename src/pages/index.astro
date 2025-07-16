@@ -128,9 +128,9 @@ if (whatsappButton && whatsapp) {
 
         // Productos
         const products = menuRows
-          .filter(row => row.nombre && row.image)
+          .filter(row => row.nombre && row.imagen)
           .map(row => ({
-            name: row.name,
+            name: row.nombre,
             description: row.descripcion,
             image: row.imagen,
             price: row.precio
@@ -150,7 +150,7 @@ if (whatsappButton && whatsapp) {
         // Reseñas
         const reviews = reviewsRows
           .filter(r => r.cita && r.autor)
-          .map(r => `<div class="review"><p>“${r.quote.trim()}”</p><span>- ${r.author.trim()}</span></div>`);
+          .map(r => `<div class="review"><p>“${r.cita.trim()}”</p><span>- ${r.autor.trim()}</span></div>`);
 
         document.getElementById('reviews-container').innerHTML = reviews.join('');
       }).catch(err => {
